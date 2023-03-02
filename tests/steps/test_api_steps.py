@@ -1,17 +1,6 @@
-from pytest_bdd import scenarios, given, when, then, parsers
-import pytest
-from utilities.base_code import Common
-scenarios("../feature/api.feature")
+from pytest_bdd import given, when, then, parsers, scenarios
 
-global_url = ""
-global_requests = None
-global_json_request = None
-
-
-@pytest.fixture
-def endpoint():
-    base = Common()
-    return base
+scenarios("../feature/")
 
 @given(parsers.parse("the API endpoint {url}"))
 def method_url(endpoint,url):
@@ -19,7 +8,7 @@ def method_url(endpoint,url):
     global global_url
     global_url =  theurl
     print(theurl)
-
+    return theurl
 
 @when('I perform a GET request')
 def perform_get(endpoint):
