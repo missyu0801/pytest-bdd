@@ -7,7 +7,6 @@ import requests
 
 class Common:
 
-
 #--------------------------------------------------------------------------------------------------------------------------------
 # Code for API's
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -49,13 +48,15 @@ class Common:
     def assert_status_code(self, response,statuscode):
         assert response.status_code == int(statuscode)
 
-    def assert_response_message(self, response, value):
-        assert response.json()['message'] == value
 
-    def assert_json_content(self,response, content, value):
-        response_result = json.loads(response.text)
-        jsonpath.jsonpath(response_result, content) == value
-
+    def assert_json_content(self,response, key, val):
+        json_data = response.json()
+        jsonpath_expr = parse("$."+key)
+        match = jsonpath_expr.find(json_data)
+        expected_val = val
+        actual_val = match[0].value if match else None
+        print(f"Expected {expected_val}, got {actual_val}")
+        assert actual_val == expected_val
 #------------------------------------------------------------------------------------------------------------------------------------
 # Code for GUI
 #------------------------------------------------------------------------------------------------------------------------------------

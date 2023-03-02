@@ -84,15 +84,10 @@ def check_response_code(endpoint, status_code):
     print(global_requests.status_code)
 
 
-@then(parsers.parse("Verify response message should be {value}"))
-def check_response_message(endpoint,  value):
+@then(parsers.parse("Verify response content {key} should be {value}"))
+def check_json_content(endpoint, key, value):
     global global_requests
-    endpoint.assert_json_content(global_requests,  value)
-    print(global_requests.json()['message'])
-
-@then(parsers.parse("Verify response content {content} should be {value}"))
-def check_json_content(endpoint, content, value):
-    global global_requests
-    endpoint.assert_json_content(global_requests, content, value)
+    value = int(value) if value.isdigit() else value
+    endpoint.assert_json_content(global_requests, key, value)
 
 
