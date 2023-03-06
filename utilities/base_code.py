@@ -18,25 +18,36 @@ class Common:
         theurl = f'{baseurl}{url}'
         return theurl
 
+    #edit this depending on your project's api header
+    def api_header(self):
+        config = configparser.ConfigParser()
+        config.read('./utilities/properties.cfg')
+        header = {
+            'Content-Type': config['apiheaders']['content_type'],
+            'Connection': config['apiheaders']['connection']
+            #Authorization: bearer or basis config add in config file
+        }
+        return header
+
     def open_jsonData(self, path):
         with open(path) as f:
             json_request = json.loads(f.read())
         return json_request
 
     def get_request(self, method_url):
-        result = requests.get(method_url)
+        result = requests.get(method_url, headers = self.api_header())
         return result
 
     def post_request(self, method_url, json_file):
-        result = requests.post(method_url, json = json_file)
+        result = requests.post(method_url, json = json_file, headers = self.api_header())
         return result
 
     def put_request(self, method_url, json_file):
-        result = requests.put(method_url, json = json_file)
+        result = requests.put(method_url, json = json_file, headers = self.api_header())
         return result
 
     def delete_request(self, method_url):
-        result = requests.delete(method_url)
+        result = requests.delete(method_url, headers = self.api_header())
         return result
 
     #change this code depending on your json schema reference to jsonpath

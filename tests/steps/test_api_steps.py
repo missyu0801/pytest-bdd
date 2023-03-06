@@ -28,14 +28,12 @@ def perform_get(endpoint):
     print(request.content)
     return request
 
-
 @when(parsers.parse("I input a json '{path}' file"))
 def input_jsonfile(endpoint, path):
    json_request = endpoint.open_jsonData(path)
    global global_json_request
    global_json_request = json_request
    return  json_request
-
 
 @when('I perform a POST request')
 def perform_post(endpoint):
@@ -76,13 +74,11 @@ def identify_key_in_post_request(endpoint, key, value):
     jsonpath = endpoint.identify_key_in_post(global_json_request,key, value)
     return jsonpath
 
-
 @then(parsers.parse("the response code should be {status_code}"))
 def check_response_code(endpoint, status_code):
     global global_requests
     endpoint.assert_status_code(global_requests, status_code)
     print(global_requests.status_code)
-
 
 @then(parsers.parse("Verify response content {key} should be {value}"))
 def check_json_content(endpoint, key, value):
