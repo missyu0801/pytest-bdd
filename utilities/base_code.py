@@ -5,17 +5,17 @@ import requests
 import logging
 LOGGER = logging.getLogger(__name__)
 
+
 class Common:
     def __init__(self):
-        # the following variables acts as global variables and values  are currently empty
+        """The following variables acts as global variables and values  are currently empty"""
         self.url = None
         self.requests = None
         self.json_request = None
 
-
-# ------------------------------------------------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------------------------------------------------------------
 # Code for API's
-# ------------------------------------------------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------------------------------------------------------------
 
     def base_url(self, url):
         config = configparser.ConfigParser()
@@ -25,7 +25,7 @@ class Common:
         LOGGER.info("the base url is: %s", theurl)
         return theurl
 
-    # edit this depending on your project's api header
+    #edit this code depending on your project's api header
     def api_header(self):
         config = configparser.ConfigParser()
         config.read('./utilities/properties.cfg')
@@ -128,7 +128,9 @@ class Common:
         assert response_json["message"] == my_message
         LOGGER.info('Expected message: %s', my_message)
         LOGGER.info('Actual message: %s', response_json["message"])
-# -----------------------------------------------------------------------------------------------------------------------------------
+
+
+# ----------------------------------------------------------------------------------------------------------------------------------------------------
 # Code for GUI
-# ------------------------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------------------------------------
 

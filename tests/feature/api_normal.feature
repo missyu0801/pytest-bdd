@@ -1,5 +1,6 @@
 Feature: Store: Access Store order
 
+  @API @Regression @Smoke
   Scenario Outline:  GET inventory
         Given the API endpoint <url>
         When I perform a GET request

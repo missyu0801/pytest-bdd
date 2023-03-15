@@ -1,5 +1,6 @@
 Feature: Store: Access Store order
 
+   @E2E @API @Regression @Smoke
    Scenario Outline: POST Request
         Given the API endpoint <url>
         When I input a json '<path>' file
@@ -11,9 +12,10 @@ Feature: Store: Access Store order
         And  Verify response content <qty> should be <value2>
 
         Examples:
-        |url                           | path                                       | petId | value1 | qty           |  value2 | key | container | status_code |
-        |/store/order               | ./json_data/store_data.json  | petId | 22        |  quantity  | 12         |id    | storage    |200                |
+        |url                           | path                                     | petId | value1 | qty           |  value2 | key | container | status_code |
+        |/store/order             | ./json_data/store_data.json  | petId | 22        |  quantity  | 12         |id    | storage    |200                |
 
+  @E2E @API @Regression @Smoke
    Scenario Outline:  GET Request
         Given the API endpoint <url>
         When I perform request chaining with method <method>
@@ -24,6 +26,7 @@ Feature: Store: Access Store order
          | url                 | container | key | status_code | method|
           |/store/order   | storage    | id    | 200              | Get     |
 
+  @E2E @API @Regression @Smoke
   Scenario Outline:  Delete Request
         Given the API endpoint <url>
         When I perform request chaining with method <method>
@@ -34,6 +37,7 @@ Feature: Store: Access Store order
          | url                 |  status_code | method |
          |/store/order   |  200               | delete |
 
+  @E2E @API @Regression @Smoke @Negative
   Scenario Outline:  GET the deleted Request
         Given the API endpoint <url>
         When I perform request chaining with method <method>
@@ -44,6 +48,7 @@ Feature: Store: Access Store order
          | url                 | status_code | message            | method |
          |/store/order    | 404              |  Order not found| GET       |
 
+  @E2E @API @Regression @Smoke
   Scenario Outline: Create new POST Request
         Given the API endpoint <url>
         When I input a json '<path>' file
@@ -57,5 +62,5 @@ Feature: Store: Access Store order
         And Verify response content <qty> should be <value2>
 
         Examples:
-        |url                           | path                                       | petId | value1 | qty           |  value2 | key | container | status_code |
+        |url                           | path                                     | petId | value1 | qty           |  value2 | key | container | status_code |
         |/store/order             | ./json_data/store_data.json  | petId | 32        |  quantity  | 100       |id    | storage    |200                |
